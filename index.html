@@ -835,16 +835,16 @@
       </section>
 
       <!-- ==========================================
-           7. SHARE INVITATION BUTTON
+           7. LIÊN HỆ / GỌI ĐIỆN CHO PHƯỢNG
            ========================================== -->
       <section class="text-center pt-2">
-        <button onclick="shareInvitation()"
-          class="w-full py-3 px-4 rounded-2xl bg-white border border-sky-200 text-hcmou font-semibold text-xs tracking-wider uppercase shadow-sm hover:bg-sky-mist transition-all flex items-center justify-center gap-2 group">
-          <i data-lucide="share-2" class="w-4 h-4 text-hcmou group-hover:scale-110 transition-transform"></i>
-          <span>Chia Sẻ Thiệp Mời Đến Bạn Bè (Copy Link)</span>
+        <button onclick="callAndCopyPhone('0383715110')"
+          class="w-full py-3.5 px-4 rounded-2xl bg-white border border-sky-200 text-hcmou font-bold text-xs sm:text-sm tracking-wider uppercase shadow-sm hover:bg-sky-50 hover:border-hcmou transition-all flex items-center justify-center gap-2 group active:scale-[0.98]">
+          <i data-lucide="phone-call" class="w-4 h-4 text-emerald-600 group-hover:scale-110 transition-transform"></i>
+          <span>Liên Hệ Trực Tiếp: <strong class="font-montserrat tracking-normal text-sm sm:text-base text-hcmou font-extrabold ml-1">0383 715 110</strong></span>
         </button>
-        <p id="share-toast" class="text-xs text-emerald-600 font-semibold mt-2 hidden transition-all">
-          ✨ Đã sao chép liên kết thiệp mời vào bộ nhớ tạm!
+        <p id="phone-toast" class="text-xs text-emerald-600 font-semibold mt-2 hidden transition-all">
+          📞 Đã sao chép SĐT 0383715110 & đang mở ứng dụng gọi điện!
         </p>
       </section>
 
@@ -1223,34 +1223,51 @@
     }
 
     /* ------------------------------------------
-       5. SHARE INVITATION LINK
+       5. GỌI ĐIỆN & TỰ ĐỘNG SAO CHÉP SỐ ĐIỆN THOẠI
        ------------------------------------------ */
-    function shareInvitation() {
-      const shareData = {
-        title: 'Thư Mời Lễ Tốt Nghiệp - Nguyễn Thị Bích Phượng | HCMOU',
-        text: 'Trân trọng mời bạn bè đến chung vui cùng Phượng trong ngày Lễ Tốt Nghiệp Ngành Ngôn ngữ Anh tại Trường Đại học Mở TP.HCM nhé! ♡',
-        url: window.location.href
-      };
+    function callAndCopyPhone(phone) {
+      const cleanPhone = (phone || '0383715110').replace(/\s+/g, '');
 
-      if (navigator.share) {
-        navigator.share(shareData).catch(err => {
-          copyLinkFallback();
-        });
-      } else {
-        copyLinkFallback();
+      // 1. Sao chép số điện thoại vào bộ nhớ tạm
+      function copyToClipboard(text) {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          return navigator.clipboard.writeText(text).catch(() => fallbackCopy(text));
+        } else {
+          fallbackCopy(text);
+        }
       }
-    }
 
-    function copyLinkFallback() {
-      navigator.clipboard.writeText(window.location.href).then(() => {
-        const toast = document.getElementById('share-toast');
+      function fallbackCopy(text) {
+        try {
+          const tempInput = document.createElement('textarea');
+          tempInput.value = text;
+          tempInput.setAttribute('readonly', '');
+          tempInput.style.position = 'fixed';
+          tempInput.style.left = '-9999px';
+          document.body.appendChild(tempInput);
+          tempInput.select();
+          document.execCommand('copy');
+          document.body.removeChild(tempInput);
+        } catch (e) {
+          console.warn("Lỗi sao chép SĐT:", e);
+        }
+      }
+
+      copyToClipboard(cleanPhone);
+
+      // 2. Hiển thị thông báo đã sao chép
+      const toast = document.getElementById('phone-toast');
+      if (toast) {
         toast.classList.remove('hidden');
         setTimeout(() => {
           toast.classList.add('hidden');
         }, 3500);
-      }).catch(err => {
-        alert("Đã sao chép link: " + window.location.href);
-      });
+      }
+
+      // 3. Mở ứng dụng gọi điện của máy
+      setTimeout(() => {
+        window.location.href = `tel:${cleanPhone}`;
+      }, 150);
     }
   </script>
 </body>
