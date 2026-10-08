@@ -835,17 +835,45 @@
       </section>
 
       <!-- ==========================================
-           7. LIÊN HỆ / GỌI ĐIỆN CHO PHƯỢNG
+           7. HỖ TRỢ LIÊN HỆ KHI ĐẾN DỰ
            ========================================== -->
-      <section class="text-center pt-2">
-        <button onclick="callAndCopyPhone('0383715110')"
-          class="w-full py-3.5 px-4 rounded-2xl bg-white border border-sky-200 text-hcmou font-bold text-xs sm:text-sm tracking-wider uppercase shadow-sm hover:bg-sky-50 hover:border-hcmou transition-all flex items-center justify-center gap-2 group active:scale-[0.98]">
-          <i data-lucide="phone-call" class="w-4 h-4 text-emerald-600 group-hover:scale-110 transition-transform"></i>
-          <span>Liên Hệ Trực Tiếp: <strong class="font-montserrat tracking-normal text-sm sm:text-base text-hcmou font-extrabold ml-1">0383 715 110</strong></span>
-        </button>
-        <p id="phone-toast" class="text-xs text-emerald-600 font-semibold mt-2 hidden transition-all">
-          📞 Đã sao chép SĐT 0383715110 & đang mở ứng dụng gọi điện!
-        </p>
+      <section class="pt-2">
+        <div class="relative bg-white rounded-2xl p-4 border border-sky-100 shadow-sm overflow-hidden">
+          <!-- Washi tape deco top -->
+          <div class="absolute -top-1 left-6 w-16 h-5 washi-tape-gingham rotate-[-2deg] rounded-sm opacity-80"></div>
+          <div class="absolute -top-1 right-8 w-12 h-5 washi-tape-blue rotate-[2deg] rounded-sm opacity-80"></div>
+
+          <!-- Icon + tiêu đề -->
+          <div class="flex items-center justify-center gap-2 mb-3 mt-2">
+            <i data-lucide="phone" class="w-4 h-4 text-hcmou"></i>
+            <span class="text-[11px] font-bold text-hcmou uppercase tracking-widest font-montserrat">Hỗ Trợ Khi Đến Dự</span>
+          </div>
+
+          <!-- Mô tả -->
+          <p class="font-handwriting text-base text-slate-600 text-center leading-relaxed mb-3">
+            Khi bạn đến, hãy liên hệ số dưới đây để được hỗ trợ nhé! 🤍
+          </p>
+
+          <!-- Số điện thoại -->
+          <div class="space-y-2">
+            <a href="tel:0483838283"
+              class="flex items-center justify-between bg-sky-mist rounded-xl px-4 py-2.5 group hover:bg-sky-100 transition-colors">
+              <div class="flex items-center gap-2">
+                <i data-lucide="phone-call" class="w-3.5 h-3.5 text-emerald-500 group-hover:scale-110 transition-transform"></i>
+                <span class="font-handwriting text-lg text-hcmou font-bold">0483 838 283</span>
+              </div>
+              <span class="text-xs text-slate-400 font-handwriting italic">Bé Trúc 🌿</span>
+            </a>
+            <a href="tel:093837373"
+              class="flex items-center justify-between bg-sky-mist rounded-xl px-4 py-2.5 group hover:bg-sky-100 transition-colors">
+              <div class="flex items-center gap-2">
+                <i data-lucide="phone-call" class="w-3.5 h-3.5 text-emerald-500 group-hover:scale-110 transition-transform"></i>
+                <span class="font-handwriting text-lg text-hcmou font-bold">093 837 373</span>
+              </div>
+              <span class="text-xs text-slate-400 font-handwriting italic">Bé Dương ☀️</span>
+            </a>
+          </div>
+        </div>
       </section>
 
       <!-- ==========================================
